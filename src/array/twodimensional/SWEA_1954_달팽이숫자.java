@@ -1,4 +1,4 @@
-package unsorted;
+package array.twodimensional;
 
 import java.util.Scanner;
 
