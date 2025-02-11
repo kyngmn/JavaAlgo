@@ -2,7 +2,9 @@ package array.twodimensional;
 
 import java.util.Scanner;
 
-public class 최경민_SWEA_1210_Ladder1 {
+// 250211
+// 이거 요상함.. 리팩토링 이상하게됨..
+public class SWEA_1210_Ladder1 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
@@ -71,10 +73,6 @@ public class 최경민_SWEA_1210_Ladder1 {
 					} else {
 						row++;
 					}
-					// 좌우측 1이 없을 때 = 사다리가 없을 때 while문 지속
-					// 2를 만나면 도착이므로 while 중단
-					// 아래로 내려감
-
 				}
 			}
 
