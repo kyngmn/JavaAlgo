@@ -2,7 +2,18 @@ package array.twodimensional;
 
 import java.util.Scanner;
 
+//30,260 kb
+//메모리
+//127 ms
+//시간
+//2,876
+//코드길이
 public class SWEA_12712_파리퇴치3 {
+	static int[][] map;
+	// 상, 하, 좌, 우 + 상좌, 상우, 하좌, 하우
+	static int[] dr = { -1, 1, 0, 0, -1, -1, 1, 1 };
+	static int[] dc = { 0, 0, -1, 1, -1, 1, -1, 1 };
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
@@ -13,62 +24,44 @@ public class SWEA_12712_파리퇴치3 {
 			// 파리채 세기
 			int M = sc.nextInt();
 
-			int[][] arr = new int[N][N];
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < N; j++) {
-					arr[i][j] = sc.nextInt();
+			map = new int[N][N];
+
+			for (int r = 0; r < N; r++) {
+				for (int c = 0; c < N; c++) {
+					map[r][c] = sc.nextInt();
 				}
 			}
 
 			int max = 0;
 			for (int r = 0; r < N; r++) {
 				for (int c = 0; c < N; c++) {
-					int center = arr[r][c];
-					// + 로 잡기
-					int cross = center;
-					// x 로 잡기
-					int x = center;
-					for (int i = 1; i < M; i++) {
-						// 행열 인덱스의 경계값 처리..
-						if (r + i < N) {
-							// 아래
-							cross += arr[r + i][c];
-							if (c + i < N) {
-								// 5시 방향
-								x += arr[r + i][c + i];
-							}
-							if (c - i >= 0) {
-								// 1시방향
-								x += arr[r + i][c - i];
-							}
-						}
-						if (r - i >= 0) {
-							// 위
-							cross += arr[r - i][c];
-							if (c + i < N) {
-								// 7시 방향
-								x += arr[r - i][c + i];
-							}
-							if (c - i >= 0) {
-								// 11시 방향
-								x += arr[r - i][c - i];
-							}
-						}
+					int cross = 0;
+					int x = 0;
 
-						if (c + i < N) {
-							// 우
-							cross += arr[r][c + i];
-						}
-						if (c - i >= 0) {
-							// 좌
-							cross += arr[r][c - i];
-						}
-					}
-					max = Math.max(Math.max(cross, x), max);
+					// cross
+					cross += calc(r, c, M, 0, 4);
+					// x
+					x += calc(r, c, M, 4, 8);
+
+					max = Math.max(max, Math.max(cross, x));
 				}
 			}
 			System.out.println("#" + (tc + 1) + " " + max);
 		}
 		sc.close();
+	}
+
+	private static int calc(int r, int c, int M, int start, int end) {
+		int sum = map[r][c];
+		for (int d = start; d < end; d++) {
+			for (int m = 1; m < M; m++) {
+				int nr = r + dr[d] * m;
+				int nc = c + dc[d] * m;
+				if (nr >= map.length || nr < 0 || nc >= map.length || nc < 0)
+					continue;
+				sum += map[nr][nc];
+			}
+		}
+		return sum;
 	}
 }
