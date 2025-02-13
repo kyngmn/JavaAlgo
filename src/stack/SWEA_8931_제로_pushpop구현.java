@@ -1,8 +1,9 @@
-package array.twodimensional;
+package stack;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
+//250211
 public class SWEA_8931_제로_pushpop구현 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
