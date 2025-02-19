@@ -32,4 +32,23 @@ public class LinkedList<T> {
 		head = node;
 		size++;
 	}
+
+	public void addLast(T data) {
+		if (size == 0) {
+			addFirst(data);
+			return;
+		}
+		Node<T> node = new Node<>(data);
+//		Node<T> lastNode = get(size - 1);
+//		lastNode.link = node;
+
+		Node<T> lastNode = head;
+//		int i = 0;
+//		while (i++ < size) {
+		while (lastNode.link != null) {
+			lastNode = lastNode.link;
+		}
+
+		size++;
+	}
 }
