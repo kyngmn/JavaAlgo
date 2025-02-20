@@ -9,25 +9,27 @@ public class SWEA_1288_새로운불면증치료법 {
 		for (int tc = 1; tc <= T; tc++) {
 			int N = sc.nextInt();
 
-			int max = 0;
+			int[] arr = new int[10];
 			int k = 1;
 			int zero = (int) '0';
 			int sum = 0;
-			while (max != 9) {
+			loop: while (true) {
+				sum = k * N;
 				for (int i = 1; i <= k * N; i++) {
-					String s = Integer.toString(i);
-
-					sum++;
-					
-					for (char c : s.toCharArray()) {
-						int ctoi = (int) c;
-						
-						
-						if (ctoi - zero > max) {
-							max = ctoi - zero;
-							break;
-						}
+					String str = Integer.toString(k * N);
+					for (char c : str.toCharArray()) {
+						if (arr[(int) c - zero] == 0)
+							arr[(int) c - zero] = 1;
+						else
+							continue;
 					}
+					int cnt = 0;
+					for (int j = 0; j < arr.length; j++) {
+						if (arr[j] == 1)
+							cnt++;
+					}
+					if (cnt == 10)
+						break loop;
 				}
 				k++;
 			}

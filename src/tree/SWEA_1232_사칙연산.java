@@ -1,5 +1,6 @@
 package tree;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -17,7 +18,7 @@ public class SWEA_1232_사칙연산 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int tc = 0;
-		while (tc++ < 10) {
+		while (tc++ < 5) {
 			// tc마다 static 문자열 초기화
 			ops.clear();
 			int N = sc.nextInt();
@@ -58,13 +59,12 @@ public class SWEA_1232_사칙연산 {
 
 			for (int i = 1; i <= N; i++) {
 //				System.out.print(sa[i] + " -> ");
-//				System.out.println(Arrays.toString(tree[i]));
+//				System.out.println(i+": "+Arrays.toString(tree[i]));
 			}
 
 			// 중위순회
 			inOrder(tree, sa, 1);
 
-//			System.out.println(ops);
 			System.out.println("#" + tc + " " + ops.pop().intValue());
 		}
 		sc.close();
@@ -81,7 +81,7 @@ public class SWEA_1232_사칙연산 {
 		// 좌측 노드 -> 중위 노드 순서로 순회하는 방식이기 때문에
 		// 좌측 노드가 없거나, 방문했을 때
 		// 중위 노드를 출력해야 함
-		if (tree[v][0] == 0) {
+		if (tree[v][0] == 0 &&tree[v][1] == 0) {
 			// 결과 문자열
 			switch (sa[v]) {
 			case "+": {
@@ -113,12 +113,16 @@ public class SWEA_1232_사칙연산 {
 				break;
 			}
 			}
-//			System.out.println(ops);
+//			System.out.println(sa[v] + " > " + ops);
 
-			// 부모 노드의 번호
+			//
 			int p = tree[v][2];
 			tree[p][0] = 0;
+		}else {
+			
 		}
+		
+	
 	}
 
 }

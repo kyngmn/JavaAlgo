@@ -1,7 +1,8 @@
 package tree;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class SWEA_1248_공통조상 {
 	public static void main(String[] args) {
@@ -9,7 +10,9 @@ public class SWEA_1248_공통조상 {
 		int T = sc.nextInt();
 		int tc = 0;
 		while (tc++ < T) {
+			// 정점의 개수 (10<=V<=10000)
 			int V = sc.nextInt();
+			// 간선의 개수
 			int N = sc.nextInt();
 			int n1 = sc.nextInt();
 			int n2 = sc.nextInt();
@@ -33,13 +36,12 @@ public class SWEA_1248_공통조상 {
 			// 시조를 찾을때까지 탐색
 			// 부모 세트
 			String p1s;
-			String p2s;
+			Set<Integer> p2set = new HashSet<>();
 			// 최초 부모 설정 (직계 부모)
 			int p1 = tree[n1][2];
 			int p2 = tree[n2][2];
 			// 부모 세트에 직계 부모 넣기
 			p1s = Integer.toString(p1);
-			p2s = Integer.toString(p2);
 			while (p1 != 0) {
 				p1 = tree[p1][2];
 				if (p1 == 0)
@@ -50,19 +52,17 @@ public class SWEA_1248_공통조상 {
 				p2 = tree[p2][2];
 				if (p2 == 0)
 					break;
-				p2s += " " + p2;
+				p2set.add(p2);
 			}
 			int commonP = 0;
 
-			Scanner scsc = new Scanner(p1s);
-			while (scsc.hasNext()) {
-				int next = scsc.nextInt();
-				if (p2s.contains(Integer.toString(next))) {
-					commonP = next;
+			String[] sl1 = p1s.split(" ");
+			for (int i = 0; i < sl1.length; i++) {
+				if (p2set.contains(Integer.parseInt(sl1[i]))) {
+					commonP = Integer.parseInt(sl1[i]);
 					break;
 				}
 			}
-			scsc.close();
 
 			int cnt;
 			int v = commonP;

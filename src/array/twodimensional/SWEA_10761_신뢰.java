@@ -49,16 +49,29 @@ public class SWEA_10761_신뢰 {
 			}
 
 			int min = 0;
+			// B와 O가 양방향 움직인 것
 			int bb = 1;
 			int oo = 1;
-			while (B == 0 && O == 0) {
+			// 버튼을 모두 누르기 전까지 loop
+			while (B > 0 || O > 0) {
+				// 초를 셈
 				min++;
-if(B>0)
-				bb++;
-if(O>0)oo++;
-				if (qb.peek() == bb && qo.peek() == oo) {
+				if (qb.element() == bb && qo.element() == oo) {
 					B--;
 					break;
+				} else if (qb.element() == bb && qo.element() != oo) {
+					B--;
+					if (O > 0)
+						oo++;
+				} else if (qb.element() != bb && qo.element() == oo) {
+					O--;
+					if (B > 0)
+						bb++;
+				} else {
+					if (B > 0)
+						bb++;
+					if (O > 0)
+						oo++;
 				}
 			}
 
