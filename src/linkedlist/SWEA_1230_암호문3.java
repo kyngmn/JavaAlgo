@@ -27,7 +27,8 @@ public class SWEA_1230_암호문3 {
 			// 명령어 개수
 			int C = sc.nextInt();
 			sc.nextLine();
-			String s = sc.nextLine();
+			String s = sc.next();
+			System.out.println(s);
 			String[] ss = s.split(" ");
 
 			int execute = 0;
