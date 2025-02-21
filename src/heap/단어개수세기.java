@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Scanner;
@@ -66,6 +68,11 @@ public class 단어개수세기 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		// 맵 정렬!!!!
+		List<Map.Entry<String, Integer>> list = new ArrayList<>(wordMap.entrySet());
+		list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+
 //		System.out.println(wordMap);
 
 		PriorityQueue<Vocab> pq = new PriorityQueue<>();

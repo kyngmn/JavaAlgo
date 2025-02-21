@@ -1,27 +1,38 @@
 package tree;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
+import java.util.StringTokenizer;
 
+//33,920 kb
+//메모리
+//117 ms
+//실행시간
+//2,264
+//코드길이
 public class SWEA_1248_공통조상 {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int T = sc.nextInt();
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader bw = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(bw.readLine());
 		int tc = 0;
 		while (tc++ < T) {
+			StringTokenizer st = new StringTokenizer(bw.readLine());
 			// 정점의 개수 (10<=V<=10000)
-			int V = sc.nextInt();
+			int V = Integer.parseInt(st.nextToken());
 			// 간선의 개수
-			int N = sc.nextInt();
-			int n1 = sc.nextInt();
-			int n2 = sc.nextInt();
+			int N = Integer.parseInt(st.nextToken());
+			int n1 = Integer.parseInt(st.nextToken());
+			int n2 = Integer.parseInt(st.nextToken());
 			int[][] tree = new int[V + 1][3];// 자식 정보 0,1 + 부모 정보 2
+			st = new StringTokenizer(bw.readLine());
 			for (int i = 0; i < N; i++) {
 				// 부모역할
-				int p = sc.nextInt();
+				int p = Integer.parseInt(st.nextToken());
 				// 자식 역할
-				int c = sc.nextInt();
+				int c = Integer.parseInt(st.nextToken());
 
 				// 부모 입장에서 자식 저장하고
 				if (tree[p][0] == 0) {
@@ -86,6 +97,5 @@ public class SWEA_1248_공통조상 {
 			System.out.println("#" + tc + " " + commonP + " " + cnt);
 
 		}
-		sc.close();
 	}
 }
