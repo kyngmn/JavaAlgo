@@ -3,6 +3,7 @@ package unsorted;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class SWEA_1974_스도쿠검증 {
@@ -22,19 +23,45 @@ public class SWEA_1974_스도쿠검증 {
 
 			boolean hasSame = false;
 			for (int i = 0; i < 9; i++) {
-				int[] tmp = new int[9];
-				for (int j = 1; j <= 9; j++) {
-					if (tmp[j - 1] == 1) {
+				int[] horTmp = new int[9];
+				int[] verTmp = new int[9];
+				for (int j = 0; j < 9; j++) {
+					// 가로 loop
+					if (horTmp[arr[i][j] - 1] == 1) {
 						hasSame = true;
-						break;
 					} else {
-						tmp[j - 1] = 1;
+						horTmp[arr[i][j] - 1] = 1;
+					}
+					// 세로 loop
+					if (verTmp[arr[j][i] - 1] == 1) {
+						hasSame = true;
+					} else {
+						verTmp[arr[j][i] - 1] = 1;
+					}
+					if (hasSame) {
+						break;
 					}
 				}
-				if (hasSame)
-					break;
 			}
-			System.out.print("#" + tc + " ");
+
+			if (!hasSame) {
+				for (int i = 0; i < 3; i++) {
+					int[] tmp = new int[9];
+					for (int j = 0; j < 9; j++) {
+						int r = j / 3;
+						int c = j % 3;
+						if (tmp[arr[r][c] - 1] == 1) {
+							hasSame = true;
+						} else {
+							tmp[arr[r][c] - 1] = 1;
+						}
+						if (hasSame)
+							break;
+					}
+				}
+			}
+
+			System.out.println("#" + tc + " " + (hasSame ? 0 : 1));
 		}
 	}
 }
