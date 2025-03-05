@@ -10,18 +10,21 @@ import java.util.StringTokenizer;
 
 public class SWEA_4012_요리사 {
 	static int N;
+	static int[] selected;
+	static int diff;
+	static int[][] arr;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
 		int tc = 0;
 		while (tc++ < T) {
-
 			N = Integer.parseInt(br.readLine());
+			selected = new int[N / 2];
 
 			StringTokenizer st;
 
-			int[][] arr = new int[N][N];
+			arr = new int[N][N];
 			for (int i = 0; i < N; i++) {
 				st = new StringTokenizer(br.readLine());
 				for (int j = 0; j < N; j++) {
@@ -30,24 +33,29 @@ public class SWEA_4012_요리사 {
 			}
 
 			int min = Integer.MAX_VALUE;
-			int[] a = new int[N];
-			int[] b = new int[N];
-			comb(0, 0, a);
+			comb(0, 0);
 
 			System.out.println("#" + tc + " " + min);
 		}
 	}
 
-	public static void comb(int idx, int sidx, int[] arr) {
-		if (sidx == N) {
-			System.out.println(Arrays.toString(arr));
+	public static void comb(int idx, int sidx) {
+		if (sidx == N / 2) {
+			int a=0;
+			int b=0;
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < selected.length; j++) {
+					if(i==j)
+				}
+			}
+			System.out.println(Arrays.toString(selected));
 			return;
 		}
 		if (idx == N) {
 			return;
 		}
-		arr[sidx] = idx;
-		comb(idx + 1, sidx + 1, arr);
-		comb(idx + 1, sidx, arr);
+		selected[sidx] = idx;
+		comb(idx + 1, sidx + 1);
+		comb(idx + 1, sidx);
 	}
 }
