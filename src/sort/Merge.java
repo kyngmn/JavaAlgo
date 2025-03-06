@@ -1,24 +1,15 @@
 package sort;
 
-import java.util.Arrays;
-
 public class Merge {
-	public static void main(String[] args) {
-		int[] arr = new int[] { 3, 4, 6, 2, 7, 1, 11, 845, 35, 5 };
-		System.out.println(Arrays.toString(arr));
-		mergeSort(arr, 0, arr.length - 1);
-		System.out.println(Arrays.toString(arr));
-	}
-
-	private static void mergeSort(int[] arr, int start, int end) {
+	public static void sort(int[] arr, int start, int end) {
 		if (start >= end) {
 			return;
 		}
 		int mid = start + (end - start) / 2;
 
 		// 일단 나눠
-		mergeSort(arr, start, mid);
-		mergeSort(arr, mid + 1, end);
+		sort(arr, start, mid);
+		sort(arr, mid + 1, end);
 		// 병합!
 		merge(arr, start, mid, end);
 	}
