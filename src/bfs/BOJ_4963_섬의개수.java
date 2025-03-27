@@ -1,4 +1,4 @@
-package dfs;
+package bfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class BOJ_4963_섬의개수_bfs {
+public class BOJ_4963_섬의개수 {
 	static int col;
 	static int row;
 	static int[][] map;

@@ -1,4 +1,4 @@
-package dfs;
+package bfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class BOJ_2606_바이러스_bfs {
+public class BOJ_2606_바이러스 {
 	static int[][] arr;
 	static boolean[] visited;
 

@@ -12,15 +12,9 @@ public class SWEA_8275_햄스터 {
 	static int M;
 	static int[][] note;
 
-	static int L;
-	static int R;
-
 	static int[] cage;
-	static int max;
 
-	static int currentNoteIndex;
-	static int currentL;
-	static int currentR;
+	static int max;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,8 +30,6 @@ public class SWEA_8275_햄스터 {
 			N = Integer.parseInt(st.nextToken());
 			cage = new int[N + 1];
 			max = 0;
-			currentL = 0;
-			currentR = 0;
 
 			// 1~X,M~10
 			// X : 우리에 존재할 수 있는 최대 햄스터
@@ -48,7 +40,13 @@ public class SWEA_8275_햄스터 {
 			// "l번 우리에서 r번 우리까지의 햄스터 수를 세었더니 s마리였다."
 			M = Integer.parseInt(st.nextToken());
 
+//			if ("9 10 10".compareTo("10 9 10") > 0) {
+//				System.out.println("1".compareTo("2") > 0);
+//			}
+
 			note = new int[M][3];
+			int minL = Integer.MAX_VALUE;
+			int maxR = Integer.MIN_VALUE;
 			for (int i = 0; i < M; i++) {
 				st = new StringTokenizer(br.readLine());
 				// 1~l,r~N
@@ -58,68 +56,95 @@ public class SWEA_8275_햄스터 {
 				// 0~60
 				int s = note[i][2] = Integer.parseInt(st.nextToken());
 
-				if (l < L) {
-					L = l;
+				if (l < minL) {
+					minL = l;
 				}
-				if (r > R) {
-					R = r;
+				if (r > maxR) {
+					maxR = r;
 				}
 			}
 
-			currentL = note[0][0];
-			currentR = note[0][1];
-			dfs(0, cage);
-			System.out.println("잉" + Arrays.toString(cage));
-
-			for (int i = 1; i <= N; i++) {
-				if (i < L || i > R) {
-					cage[i] = X;
-				}
-			}
+			boolean[] visited = new boolean[N + 1];
+			dfs(0, 0, cage, note[0][1], visited);
 
 			// 출력
 			StringBuilder sb = new StringBuilder();
 			sb.append("#").append(tc).append(" ");
+
+			if (max < 0) {
+				sb.append("-1");
+			} else {
+
+				for (int i = 1; i <= N; i++) {
+					if (i < minL || i > maxR) {
+						sb.append(X);
+					} else {
+						sb.append(cage[i]);
+					}
+					if (i < N) {
+						sb.append(" ");
+					}
+				}
+			}
 			System.out.println(sb);
 		}
 	}
 
-	static void dfs(int depth, int[] currentCage) {
-		int s = note[currentNoteIndex][2];
-		System.out.println(
-				"currentNoteIndex: " + currentNoteIndex + " , depth: " + depth + ": " + Arrays.toString(currentCage));
+	static void dfs(int cidx, int depth, int[] currentCage, int startR, boolean[] visited) {
+//		System.out.println("cidx: " + cidx + ", target depth: " + note[cidx][2] + " , current depth: " + depth + ": "
+//				+ Arrays.toString(currentCage));
 
-		if (depth == s) {
-			if (currentNoteIndex >= M - 1) {
-				if (depth > max) {
-					max = depth;
-					cage = Arrays.copyOf(currentCage, currentCage.length);
-				} else if (depth == max) {
-					if (Arrays.toString(cage).compareTo(Arrays.toString(currentCage)) > 0) {
-						cage = Arrays.copyOf(currentCage, currentCage.length);
-					}
+		if (depth == note[cidx][2]) {
+			if (cidx >= M - 1) {
+				int sum = 0;
+				for (int i = 1; i <= N; i++) {
+					sum += currentCage[i];
+				}
+				if (sum > max || (sum == max && isLexSmaller(currentCage))) {
+					max = sum;
+					cage = Arrays.copyOf(currentCage, N + 1);
 				}
 			} else {
-				currentNoteIndex++;
 				int nextDepth = 0;
-				for (int i = note[currentNoteIndex][0]; i <= note[currentNoteIndex][1]; i++) {
+				for (int i = note[cidx + 1][1]; i >= note[cidx + 1][0]; i--) {
 					nextDepth += currentCage[i];
 				}
-				dfs(nextDepth, currentCage);
+
+				if (note[cidx + 1][2] < nextDepth) {
+					max = -1;
+					return;
+				}
+
+				for (int i = note[cidx][0]; i <= note[cidx][1]; i++) {
+					visited[i] = true;
+				}
+				dfs(cidx + 1, nextDepth, currentCage, note[cidx + 1][1], visited);
+				for (int i = note[cidx][0]; i <= note[cidx][1]; i++) {
+					visited[i] = false;
+				}
 			}
 			return;
 		}
 
-		int l = note[currentNoteIndex][0];
-		int r = note[currentNoteIndex][1];
-		for (int i = r; i >= l; i--) {
-			// 최대값이면 cage 키우지 않아
-			if (currentCage[i] >= X)
+		for (int i = startR; i >= note[cidx][0]; i--) {
+			if (currentCage[i] >= X || visited[i])
 				continue;
+
 			currentCage[i]++;
-//			System.out.println(depth + 1 + ": " + Arrays.toString(currentCage));
-			dfs(depth + 1, currentCage);
+			dfs(cidx, depth + 1, currentCage, i, visited);
 			currentCage[i]--;
 		}
+
 	}
+
+	static boolean isLexSmaller(int[] candidate) {
+		for (int i = 1; i <= N; i++) {
+			if (candidate[i] < cage[i])
+				return true;
+			else if (candidate[i] > cage[i])
+				return false;
+		}
+		return false;
+	}
+
 }

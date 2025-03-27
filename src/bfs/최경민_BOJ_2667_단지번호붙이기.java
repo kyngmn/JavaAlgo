@@ -1,4 +1,4 @@
-package dfs;
+package bfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class 최경민_BOJ_2667_단지번호붙이기_bfs {
+public class 최경민_BOJ_2667_단지번호붙이기 {
 	static int N;
 	static int[][] map;
 	static boolean[][] visited;
