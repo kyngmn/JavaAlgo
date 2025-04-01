@@ -1,5 +1,9 @@
 package sort;
 
+/**
+ * 양수면 좋다.
+ * 가장 큰~값을 찾아야한다!
+ */
 public class Counting {
 	static int[] sortPositiveInteger(int[] arr) {
 		// 배열 원소의 최댓값을 찾는다.

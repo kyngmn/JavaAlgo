@@ -1,4 +1,4 @@
-package union.find;
+package graph.union.find;
 
 import java.io.BufferedReader;
 import java.io.IOException;
