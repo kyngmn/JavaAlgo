@@ -1,4 +1,4 @@
-package graph;
+package dynamicprogramming;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +14,9 @@ public class BOJ_17070_파이프옮기기1 {
 	// 빈칸이어야 하는 경우
 	static int[][] delta = { { 0, 1 }, { 1, 0 }, { 1, 1 } };
 
+	// 1-> row, 2-> col, 3-> 방향 가로0, 대각선1, 세로2
+	static int[][][] dp;
+
 	static int cnt;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -22,6 +25,9 @@ public class BOJ_17070_파이프옮기기1 {
 		N = Integer.parseInt(br.readLine());
 		visited = new boolean[N + 1][N + 1];
 		adj = new int[N + 1][N + 1];
+
+		dp = new int[N + 1][N + 1][3];
+
 		StringTokenizer st;
 		for (int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -29,9 +35,11 @@ public class BOJ_17070_파이프옮기기1 {
 				adj[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		
 		if (adj[1][1] != 1 && adj[1][2] != 1) {
 			// 초기화
 			visited[1][1] = visited[1][2] = true;
+			dp[1][2][0] = 1;
 
 			// N,N으로 이동시키는 방법의 개수.....
 			dfs(1, 1, 1, 2);

@@ -54,7 +54,7 @@ public class Algo3_서울_11_최경민 {
 
 			while (!q.isEmpty()) {
 				List<Integer> currents = q.poll();
-				
+
 				// 현재 노드의 다음 탐색할 노드 리스트
 				List<Integer> list = new ArrayList<>();
 				for (Integer c : currents) {
@@ -64,6 +64,7 @@ public class Algo3_서울_11_최경민 {
 						// 인접해있고 방문하지 않은 경우 다음 탐색 리스트에 추가
 						if (graph[c][i] == 1 && visited[i] > 0) {
 							list.add(i);
+							visited[i] = 0;
 						}
 					}
 				}
