@@ -1,15 +1,15 @@
-package bfs;
+package graph.dfs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BOJ_2606_바이러스 {
 	static int[][] arr;
 	static boolean[] visited;
+
+	static int cnt;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,22 +29,19 @@ public class BOJ_2606_바이러스 {
 			arr[a][b] = arr[b][a] = 1;
 		}
 
-		int cnt = 0;
-		Queue<Integer> q = new LinkedList<>();
-		q.add(1);
 		visited[1] = true;
-		while (!q.isEmpty()) {
-			int curr = q.poll();
-
-			for (int i = 1; i <= N; i++) {
-				if (!visited[i] && arr[curr][i] == 1) {
-					q.add(i);
-					visited[i] = true;
-					cnt++;
-				}
-			}
-		}
+		dfs(1);
 
 		System.out.println(cnt);
+	}
+
+	static void dfs(int curr) {
+		for (int i = 1; i < arr[curr].length; i++) {
+			if (!visited[i] && arr[curr][i] == 1) {
+				visited[i] = true;
+				cnt++;
+				dfs(i);
+			}
+		}
 	}
 }
