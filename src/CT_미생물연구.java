@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-class CT_미생물연구 {
+public class CT_미생물연구 {
 	static class Node {
 		int num;
 		int area;
