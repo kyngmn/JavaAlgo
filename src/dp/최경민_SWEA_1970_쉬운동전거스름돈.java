@@ -1,11 +1,11 @@
-package dynamicprogramming;
+package dp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 // 돈의 최소 개수로 거슬러 주기.
-public class 최경민_SWEA_1970_쉬운동전거스름돈_다른dp {
+public class 최경민_SWEA_1970_쉬운동전거스름돈 {
 	static int[] changes = { 50000, 10000, 5000, 1000, 500, 100, 50, 10 };
 
 	static int[][] dp;
