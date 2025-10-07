@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Scanner;
 
 public class BOJ_10826_피보나치수4 {
+	static int m = 1000000;
 	static BigInteger[] memo;
 
 	public static void main(String[] args) {
@@ -16,6 +17,9 @@ public class BOJ_10826_피보나치수4 {
 	}
 
 	static BigInteger dp(int n) {
+//		if (n > m) {
+//			n = n % m;
+//		}
 		if (n == 0) {
 			memo[0] = new BigInteger("0");
 			return memo[0];
