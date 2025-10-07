@@ -1,4 +1,4 @@
-package reverseorder;
+package greedy;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package twopointer;
+package twopointers;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;

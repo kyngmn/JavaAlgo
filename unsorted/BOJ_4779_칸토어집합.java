@@ -1,3 +1,4 @@
+package unsorted;
 //BOJ_4779_칸토어집합
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package graph.topology.sort;
+package graph.topologicalsort;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
